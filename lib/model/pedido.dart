@@ -1,0 +1,18 @@
+import 'package:prac_bar/model/producto.dart';
+
+class Pedido {
+  final int nMesa;
+  final List<Producto> productos;
+
+  Pedido(this.nMesa, this.productos);
+
+  int precioTotal() {
+    int contador = 0;
+    productos.forEach((p) {
+      contador += p.precio;
+    });
+    return contador;
+  }
+
+  int get productosTotales => productos.length;
+}
