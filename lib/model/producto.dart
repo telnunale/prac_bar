@@ -1,8 +1,8 @@
-import 'dart:ffi';
 
 class Producto {
   final String nombre;
-  final int precio;
+  final double precio;
 
-  Producto(this.nombre,this.precio);
+  Producto({required this.nombre, required this.precio});
+
 }

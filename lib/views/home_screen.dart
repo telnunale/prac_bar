@@ -1,7 +1,14 @@
 import 'package:flutter/material.dart';
+import 'package:prac_bar/viewmodels/pedidos_viewmodel.dart';
 import 'package:prac_bar/views/nuevo_pedido.dart';
 
+
 class HomeScreen extends StatelessWidget {
+  final PedidosViewModel viewModel;
+
+  const HomeScreen({super.key,required this.viewModel});
+
+
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
@@ -16,9 +23,8 @@ class HomeScreen extends StatelessWidget {
                   context,
                   MaterialPageRoute(
                     builder: (context) => NuevoPedido()
-                  ),
-                );
-               
+                  ),                  
+                );               
             }
           ),
            

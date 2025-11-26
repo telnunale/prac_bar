@@ -6,8 +6,8 @@ class Pedido {
 
   Pedido(this.nMesa, this.productos);
 
-  int precioTotal() {
-    int contador = 0;
+  double precioTotal() {
+    double contador = 0.0 ;
     productos.forEach((p) {
       contador += p.precio;
     });

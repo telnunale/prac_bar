@@ -16,8 +16,6 @@ class NuevoPedido extends StatelessWidget {
                 ),
               )
             ],
-
-
          )),
     );
   }
