@@ -7,12 +7,20 @@ import 'package:prac_bar/model/producto.dart';
 
 class PedidosViewModel extends ChangeNotifier {
   List<Pedido> _pedidos = [];
+
   List<Pedido> get pedidos => _pedidos;
 
-  void agregarPedido(Pedido p) {
+  void agregarPedido(List<Producto> productos,mesa) {
+    Pedido p =Pedido(mesa,productos);
     _pedidos.add(p);
     notifyListeners();
   }
+
+  void resetPedidos(){
+    _pedidos.clear();
+  }
+
+
 
   //String _mesa = "";
   List<Producto> _productosSelecionados = [];
@@ -23,11 +31,20 @@ class PedidosViewModel extends ChangeNotifier {
   List<Producto> get productosSeleccionados => _productosSelecionados;
 
   void agregarProductoSeleccionado(Producto p) {
-    _productosSelecionados.add(p);
+    bool estaSeleccionado = productoEstaSeleccionado(p.id);
+    if (estaSeleccionado) {
+      _productosSelecionados.remove(p);
+    } else {
+      _productosSelecionados.add(p);
+    }
+
     notifyListeners(); //avisar de que hubo un cambio
+  }
+  void resetProductosSeleccionados(){
+    _productosSelecionados.clear();
   }
 
   bool productoEstaSeleccionado(int id) {
-    return _productosSelecionados.any((producto) => producto.id == id);    
+    return _productosSelecionados.any((producto) => producto.id == id);
   }
 }
