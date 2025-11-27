@@ -22,7 +22,7 @@ class HomeScreen extends StatelessWidget {
                 final r = await Navigator.push(
                   context,
                   MaterialPageRoute(
-                    builder: (context) => NuevoPedido()
+                    builder: (context) => NuevoPedido(viewModel: viewModel,)
                   ),                  
                 );               
             }

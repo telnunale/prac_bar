@@ -14,16 +14,20 @@ class PedidosViewModel extends ChangeNotifier {
     notifyListeners();
   }
 
-  String _mesa = "";
+  //String _mesa = "";
   List<Producto> _productosSelecionados = [];
   //void porque no se necesita devolver un valor con notify listener ya se avisa a la vista
 
   //crear getters para poder accede al estado
-  String get mesa => _mesa;
+  //String get mesa => _mesa;
   List<Producto> get productosSeleccionados => _productosSelecionados;
 
-  void agregarProducto(Producto p) {
+  void agregarProductoSeleccionado(Producto p) {
     _productosSelecionados.add(p);
     notifyListeners(); //avisar de que hubo un cambio
+  }
+
+  bool productoEstaSeleccionado(int id) {
+    return _productosSelecionados.any((producto) => producto.id == id);    
   }
 }
