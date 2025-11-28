@@ -32,4 +32,4 @@ class MyApp extends StatelessWidget {
   }
 }
 //Pendiente al entrar en resumen pedido hay que hacer alguna comprobacion?
-//
+//Hacer pop en resumen pedidos
