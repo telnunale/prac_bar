@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:prac_bar/model/pedido.dart';
 import 'package:prac_bar/model/producto.dart';
 import 'package:prac_bar/viewmodels/pedidos_viewmodel.dart';
+import 'package:prac_bar/views/detalles_pedido.dart';
 import 'package:prac_bar/views/seleccionar_productos.dart';
 
 class NuevoPedido extends StatefulWidget {
@@ -68,6 +69,19 @@ class _NuevoPedido extends State<NuevoPedido> {
         padding: EdgeInsets.all(10),
         child: Row(
           children: [
+            TextButton(
+              onPressed: () {
+                int? nMesa = int.tryParse(mesa.text);
+
+                Pedido p = new Pedido(nMesa!, productos);
+                Navigator.pushNamed(
+                  context,
+                  DetallesPedido.routeName,
+                  arguments: p,
+                );
+              },
+              child: const Text('Ver Resumen'),
+            ),
             TextButton(
               onPressed: () {
                 //widget.viewModel.resetPedidos();
