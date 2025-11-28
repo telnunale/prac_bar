@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:prac_bar/model/pedido.dart';
 import 'package:prac_bar/model/producto.dart';
 import 'package:prac_bar/viewmodels/pedidos_viewmodel.dart';
 import 'package:prac_bar/views/seleccionar_productos.dart';
@@ -14,12 +15,11 @@ class NuevoPedido extends StatefulWidget {
 class _NuevoPedido extends State<NuevoPedido> {
   List<Producto> productos = [];
   final TextEditingController mesa = TextEditingController();
-  //final PedidosViewModel viewModel;
-  //NuevoPedido({super.key, required this.viewModel});
-  //const NuevoPedido({super.key});
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(title: Text("Crea tu pedido")),
       body: Padding(
         padding: const EdgeInsets.all(10),
         child: Column(
@@ -70,15 +70,38 @@ class _NuevoPedido extends State<NuevoPedido> {
           children: [
             TextButton(
               onPressed: () {
-                widget.viewModel.resetPedidos();
+                //widget.viewModel.resetPedidos();
                 Navigator.pop(context, null);
               },
               child: const Text('Cancelar'),
             ),
             TextButton(
               onPressed: () {
-                widget.viewModel.agregarPedido(productos, mesa);
-                Navigator.pop(context, widget.viewModel.pedidos);
+                int? nMesa = int.tryParse(mesa.text);
+                Pedido pedidoOK = new Pedido(0, []);
+                if (nMesa != null && productos.isNotEmpty) {
+                  pedidoOK = widget.viewModel.agregarPedido(productos, nMesa);
+                }
+
+                if (pedidoOK.nMesa != 0 || pedidoOK.productos.isNotEmpty) {
+                  Navigator.pop(context, pedidoOK);
+                } else {
+                  showDialog(
+                    context: context,
+                    builder: (context) {
+                      return AlertDialog(
+                        title: const Text("Error"),
+                        content: const Text("Error al validar pedido"),
+                        actions: [
+                          TextButton(
+                            onPressed: () => Navigator.pop(context),
+                            child: Text("ok"),
+                          ),
+                        ],
+                      );
+                    },
+                  );
+                }
               },
               child: const Text('Confirmar'),
             ),

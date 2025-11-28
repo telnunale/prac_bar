@@ -10,17 +10,50 @@ class PedidosViewModel extends ChangeNotifier {
 
   List<Pedido> get pedidos => _pedidos;
 
-  void agregarPedido(List<Producto> productos,mesa) {
-    Pedido p =Pedido(mesa,productos);
-    _pedidos.add(p);
-    notifyListeners();
+  Pedido agregarPedido(List<Producto> productos, mesa) {
+    if (mesa != 0) {
+      Pedido p = Pedido(mesa, productos);
+      bool pedidoOK = existePedido(p);
+      if (!pedidoOK) {
+        _pedidos.add(p);
+        notifyListeners();
+        return p;
+      }
+    }
+
+    return Pedido(0, []);
   }
 
-  void resetPedidos(){
+  bool existePedido(Pedido p) {
+    return _pedidos.any((pedido) => pedido.nMesa == p.nMesa);
+  }
+
+  void cargaInicialPedidos() {
+    _pedidos = [
+      Pedido(1, [
+        Producto(id: 1, nombre: 'Coca cola', precio: 2.00),
+        Producto(id: 2, nombre: 'Fanta', precio: 2.40),
+        Producto(id: 3, nombre: 'Agua', precio: 1.00),
+        Producto(id: 4, nombre: 'Nestea', precio: 3.00),
+      ]),
+      Pedido(2, [
+        Producto(id: 1, nombre: 'Coca cola', precio: 2.00),
+        Producto(id: 4, nombre: 'Nestea', precio: 3.00),
+        Producto(id: 6, nombre: 'Fuzetea', precio: 1.50),
+        Producto(id: 7, nombre: 'Bravas', precio: 3.40),
+        Producto(id: 8, nombre: 'Alioli', precio: 3.50),
+      ]),
+      Pedido(3, [
+        Producto(id: 1, nombre: 'Coca cola', precio: 2.00),
+        Producto(id: 6, nombre: 'Fuzetea', precio: 1.50),
+        Producto(id: 8, nombre: 'Alioli', precio: 3.50),
+      ]),
+    ];
+  }
+
+  /*void resetPedidos(){
     _pedidos.clear();
-  }
-
-
+  }*/
 
   //String _mesa = "";
   List<Producto> _productosSelecionados = [];
@@ -40,7 +73,8 @@ class PedidosViewModel extends ChangeNotifier {
 
     notifyListeners(); //avisar de que hubo un cambio
   }
-  void resetProductosSeleccionados(){
+
+  void resetProductosSeleccionados() {
     _productosSelecionados.clear();
   }
 
