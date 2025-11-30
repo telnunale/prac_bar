@@ -31,5 +31,6 @@ class MyApp extends StatelessWidget {
     );
   }
 }
+//Al entrar en resumen pedido si entra sin mesa que tengo que ponet? y sin productos?
 //Pendiente al entrar en resumen pedido hay que hacer alguna comprobacion?
 //Hacer pop en resumen pedidos

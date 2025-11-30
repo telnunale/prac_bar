@@ -14,12 +14,13 @@ class DetallesPedido extends StatelessWidget {
         padding: const EdgeInsets.all(10),
         child: Column(
           children: [
+            Text("Nº mesa: ${pedido.nMesa}"),            
             Expanded(
               child: ListView.builder(
                 itemCount: pedido.productos.length,
                 itemBuilder: (context, index) {
                   return ListTile(
-                    title: Text("${pedido.productos[index].nombre}"),
+                    title: Text(pedido.productos[index].nombre),
                     subtitle: Text(
                       "${pedido.productos[index].precio.toStringAsFixed(2)} €",
                     ),
@@ -28,6 +29,10 @@ class DetallesPedido extends StatelessWidget {
               ),
             ),
             Text("Total: ${pedido.precioTotal().toStringAsFixed(2)}€"),
+            TextButton(
+              onPressed: () => Navigator.pop(context),
+              child: Text("Volver atrás"),
+            ),
           ],
         ),
       ),

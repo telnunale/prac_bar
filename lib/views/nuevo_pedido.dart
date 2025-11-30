@@ -71,7 +71,7 @@ class _NuevoPedido extends State<NuevoPedido> {
           children: [
             TextButton(
               onPressed: () {
-                int? nMesa = int.tryParse(mesa.text);
+                int nMesa = int.tryParse(mesa.text) ?? 0;
 
                 Pedido p = new Pedido(nMesa!, productos);
                 Navigator.pushNamed(
