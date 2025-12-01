@@ -37,7 +37,7 @@ class _NuevoPedido extends State<NuevoPedido> {
                   context,
                   MaterialPageRoute(
                     builder: (context) =>
-                        SeleccionarProductos(viewModel: PedidosViewModel()),
+                        SeleccionarProductos(viewModel: widget.viewModel),
                   ),
                 );
                 if (!mounted) return;
