@@ -24,7 +24,16 @@ class _SeleccionarProductos extends State<SeleccionarProductos> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: Text("Escoge un producto")),
+      appBar: AppBar(
+        title: Text("Escoge un producto"),
+        leading: IconButton(
+          icon: Icon(Icons.arrow_back),
+          onPressed: () {
+            widget.viewModel.resetProductosSeleccionados();
+            Navigator.pop(context, widget.viewModel.productosSeleccionados);
+          },
+        ),
+      ),
       body: Column(
         children: [
           Expanded(

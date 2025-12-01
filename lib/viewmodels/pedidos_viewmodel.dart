@@ -2,8 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:prac_bar/model/pedido.dart';
 import 'package:prac_bar/model/producto.dart';
 
-// Necisto un modelo que sea lista de pedidos???
-//Las logica de las funciones se hace aquin ¿?¿
 
 class PedidosViewModel extends ChangeNotifier {
   int _mesaTemporal = 0;
@@ -77,13 +75,15 @@ class PedidosViewModel extends ChangeNotifier {
   List<Producto> get productosSeleccionados => _productosSelecionados;
 
   void agregarProductoSeleccionado(Producto p) {
-    bool estaSeleccionado = productoEstaSeleccionado(p.id);
-    if (estaSeleccionado) {
-      _productosSelecionados.remove(p);
+    //bool estaSeleccionado = productoEstaSeleccionado(p.id);
+    final esta = productosSeleccionados.indexWhere(
+      (producto) => producto.id == p.id,
+    );
+    if (esta >= 0) {
+      _productosSelecionados.removeAt(esta);
     } else {
       _productosSelecionados.add(p);
     }
-
     notifyListeners(); //avisar de que hubo un cambio
   }
 
