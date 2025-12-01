@@ -65,8 +65,7 @@ class _HomeScreen extends State<HomeScreen> {
             }
           });
         },
-        child: Text("Nuevo Pedido",
-        textAlign: TextAlign.center,),
+        child: Text("Nuevo Pedido", textAlign: TextAlign.center),
       ),
     );
   }

@@ -6,6 +6,12 @@ import 'package:prac_bar/model/producto.dart';
 //Las logica de las funciones se hace aquin ¿?¿
 
 class PedidosViewModel extends ChangeNotifier {
+  int _mesaTemporal = 0;
+  int get mesaTemporal => _mesaTemporal;
+  set mesaTemporal(int m) {
+    _mesaTemporal = m;
+  }
+
   List<Pedido> _pedidos = [];
 
   List<Pedido> get pedidos => _pedidos;
@@ -51,11 +57,24 @@ class PedidosViewModel extends ChangeNotifier {
     ];
   }
 
-  /*void resetPedidos(){
-    _pedidos.clear();
-  }*/
+  bool validarPedido(nmesa, List<Producto> productos) {
+    bool isOK = false;
+    int? mesa = int.tryParse(nmesa);
 
-  //String _mesa = "";
+    if (mesa != null && productos.isNotEmpty && mesa > 0) {
+      isOK = true;
+    } else {
+      return false;
+    }
+    Pedido exisPedido = new Pedido(mesa, productos);
+    if (this.existePedido(exisPedido)) {
+      return false;
+    }
+
+    mesaTemporal = mesa;
+    return isOK;
+  }
+
   List<Producto> _productosSelecionados = [];
   //void porque no se necesita devolver un valor con notify listener ya se avisa a la vista
 

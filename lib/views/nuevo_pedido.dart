@@ -70,15 +70,39 @@ class _NuevoPedido extends State<NuevoPedido> {
         child: Row(
           children: [
             TextButton(
-              onPressed: () {
-                int nMesa = int.tryParse(mesa.text) ?? 0;
+              //boton de ver resumen
+              onPressed: () {              
 
-                Pedido p = new Pedido(nMesa!, productos);
-                Navigator.pushNamed(
-                  context,
-                  DetallesPedido.routeName,
-                  arguments: p,
-                );
+                //int? nMesa = int.tryParse(mesa.text);
+                bool isOK = widget.viewModel.validarPedido(mesa.text, productos);
+
+                if (isOK) {
+                  Pedido resumenPedido = new Pedido(
+                    widget.viewModel.mesaTemporal,
+                    productos,
+                  );
+                  Navigator.pushNamed(
+                    context,
+                    DetallesPedido.routeName,
+                    arguments: resumenPedido,
+                  );
+                } else {
+                  showDialog(
+                    context: context,
+                    builder: (context) {
+                      return AlertDialog(
+                        title: const Text("Error"),
+                        content: const Text("Error al validar pedido"),
+                        actions: [
+                          TextButton(
+                            onPressed: () => Navigator.pop(context),
+                            child: Text("ok"),
+                          ),
+                        ],
+                      );
+                    },
+                  );
+                }
               },
               child: const Text('Ver Resumen'),
             ),
@@ -91,13 +115,12 @@ class _NuevoPedido extends State<NuevoPedido> {
             ),
             TextButton(
               onPressed: () {
-                int? nMesa = int.tryParse(mesa.text);
+                //int? nMesa = int.tryParse(mesa.text);
                 Pedido pedidoOK = new Pedido(0, []);
-                if (nMesa != null && productos.isNotEmpty) {
-                  pedidoOK = widget.viewModel.agregarPedido(productos, nMesa);
-                }
+                bool isOK = widget.viewModel.validarPedido(mesa.text, productos);
 
-                if (pedidoOK.nMesa != 0 || pedidoOK.productos.isNotEmpty) {
+                if (isOK) {
+                  pedidoOK = widget.viewModel.agregarPedido(productos, widget.viewModel.mesaTemporal);
                   Navigator.pop(context, pedidoOK);
                 } else {
                   showDialog(
