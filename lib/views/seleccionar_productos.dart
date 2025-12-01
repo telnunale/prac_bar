@@ -11,9 +11,6 @@ class SeleccionarProductos extends StatefulWidget {
 }
 
 class _SeleccionarProductos extends State<SeleccionarProductos> {
-  //final PedidosViewModel viewModel;
-  //_SeleccionarProductos({ required this.viewModel});
-
   List<Producto> productos = [
     Producto(id: 1, nombre: 'Coca cola', precio: 2.00),
     Producto(id: 2, nombre: 'Fanta', precio: 2.40),
@@ -70,7 +67,7 @@ class _SeleccionarProductos extends State<SeleccionarProductos> {
             TextButton(
               onPressed: () => Navigator.pop(
                 context,
-                widget.viewModel.productosSeleccionados,
+                List<Producto>.from(widget.viewModel.productosSeleccionados),
               ),
               child: const Text('Confirmar'),
             ),
