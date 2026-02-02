@@ -2,9 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:prac_bar/model/pedido.dart';
 import 'package:prac_bar/model/producto.dart';
 
-// Necisto un modelo que sea lista de pedidos???
-//Las logica de las funciones se hace aquin ¿?¿
-
+/// Gestiona el estado de los pedidos y la lógica de negocio entre vistas.
 class PedidosViewModel extends ChangeNotifier {
   int _mesaTemporal = 0;
   int get mesaTemporal => _mesaTemporal;
@@ -16,6 +14,8 @@ class PedidosViewModel extends ChangeNotifier {
 
   List<Pedido> get pedidos => _pedidos;
 
+
+/// Intenta agregar un pedido si la mesa es válida y no existe previamente.
   Pedido agregarPedido(List<Producto> productos, mesa) {
     if (mesa != 0) {
       Pedido p = Pedido(mesa, productos);
@@ -57,6 +57,8 @@ class PedidosViewModel extends ChangeNotifier {
     ];
   }
 
+  /// Valida si el input de mesa y productos es apto para proceder al resumen.
+  /// Controla que el string de mesa sea numérico y que haya productos elegidos.
   bool validarPedido(nmesa, List<Producto> productos) {
     bool isOK = false;
     int? mesa = int.tryParse(nmesa);

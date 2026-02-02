@@ -2,6 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:prac_bar/model/pedido.dart';
 
+
+/// Pantalla que muestra el desglose de un pedido.
+/// Recibe el objeto [Pedido] a través de los argumentos de la ruta.
 class DetallesPedido extends StatelessWidget {
   Pedido pedido = new Pedido(1, []);
   DetallesPedido({super.key, required this.pedido});

@@ -1,5 +1,6 @@
 import 'package:prac_bar/model/producto.dart';
 
+/// Representa un pedido.
 class Pedido { 
   final int nMesa;
   final List<Producto> productos;

@@ -1,4 +1,4 @@
-
+/// Representa un producto individual de la carta.
 class Producto {
   final int id;
   final String nombre;

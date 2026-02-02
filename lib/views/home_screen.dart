@@ -40,7 +40,7 @@ class _HomeScreen extends State<HomeScreen> {
                         "Numero de mesa ${widget.viewModel.pedidos[index].nMesa}",
                       ),
                       subtitle: Text(
-                        "Numero total prodructos: ${widget.viewModel.pedidos[index].productosTotales} - Precio: ${widget.viewModel.pedidos[index].precioTotal().toStringAsFixed(2)} €",
+                        "Numero total productos: ${widget.viewModel.pedidos[index].productosTotales} - Precio: ${widget.viewModel.pedidos[index].precioTotal().toStringAsFixed(2)} €",
                       ),
                     );
                   },
