@@ -2,7 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:prac_bar/model/pedido.dart';
 import 'package:prac_bar/model/producto.dart';
 
+<<<<<<< HEAD
 /// Gestiona el estado de los pedidos y la lógica de negocio entre vistas.
+=======
+
+>>>>>>> afdd8d67438f05fbfa32f147fdc58b479cb161a8
 class PedidosViewModel extends ChangeNotifier {
   int _mesaTemporal = 0;
   int get mesaTemporal => _mesaTemporal;
@@ -19,12 +23,10 @@ class PedidosViewModel extends ChangeNotifier {
   Pedido agregarPedido(List<Producto> productos, mesa) {
     if (mesa != 0) {
       Pedido p = Pedido(mesa, productos);
-      bool pedidoOK = existePedido(p);
-      if (!pedidoOK) {
-        _pedidos.add(p);
-        notifyListeners();
-        return p;
-      }
+      _pedidos.add(p);
+      notifyListeners();
+      resetProductosSeleccionados();
+      return p;
     }
 
     return Pedido(0, []);
@@ -78,20 +80,18 @@ class PedidosViewModel extends ChangeNotifier {
   }
 
   List<Producto> _productosSelecionados = [];
-  //void porque no se necesita devolver un valor con notify listener ya se avisa a la vista
-
-  //crear getters para poder accede al estado
-  //String get mesa => _mesa;
   List<Producto> get productosSeleccionados => _productosSelecionados;
 
   void agregarProductoSeleccionado(Producto p) {
-    bool estaSeleccionado = productoEstaSeleccionado(p.id);
-    if (estaSeleccionado) {
-      _productosSelecionados.remove(p);
+    //bool estaSeleccionado = productoEstaSeleccionado(p.id);
+    final esta = productosSeleccionados.indexWhere(
+      (producto) => producto.id == p.id,
+    );
+    if (esta >= 0) {
+      _productosSelecionados.removeAt(esta);
     } else {
       _productosSelecionados.add(p);
     }
-
     notifyListeners(); //avisar de que hubo un cambio
   }
 

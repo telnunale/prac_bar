@@ -13,17 +13,19 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreen extends State<HomeScreen> {
+  
   Pedido pedido = new Pedido(1, []);
   @override
   void initState() {
     //Es un método que se ejecuta una sola vez, justo cuando el widget es creado por primera vez.
     super.initState();
     widget.viewModel.cargaInicialPedidos();
-    //List<Pedido> pedidos = widget.viewModel.pedidos;
+    widget.viewModel.resetProductosSeleccionados();
   }
 
   @override
   Widget build(BuildContext context) {
+    //debugPrint("Pedidos: ${widget.viewModel.pedidos}");
     return Scaffold(
       appBar: AppBar(title: Text("Lista de Pedidos")),
       body: Padding(
@@ -64,6 +66,7 @@ class _HomeScreen extends State<HomeScreen> {
               widget.viewModel.agregarPedido(pedido.productos, pedido.nMesa);
             }
           });
+          //widget.viewModel.resetProductosSeleccionados();
         },
         child: Text("Nuevo Pedido", textAlign: TextAlign.center),
       ),

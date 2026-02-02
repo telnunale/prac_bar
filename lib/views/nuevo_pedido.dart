@@ -71,10 +71,12 @@ class _NuevoPedido extends State<NuevoPedido> {
           children: [
             TextButton(
               //boton de ver resumen
-              onPressed: () {              
-
+              onPressed: () {
                 //int? nMesa = int.tryParse(mesa.text);
-                bool isOK = widget.viewModel.validarPedido(mesa.text, productos);
+                bool isOK = widget.viewModel.validarPedido(
+                  mesa.text,
+                  productos,
+                );
 
                 if (isOK) {
                   Pedido resumenPedido = new Pedido(
@@ -108,20 +110,21 @@ class _NuevoPedido extends State<NuevoPedido> {
             ),
             TextButton(
               onPressed: () {
-                //widget.viewModel.resetPedidos();
+                widget.viewModel.resetProductosSeleccionados();
                 Navigator.pop(context, null);
               },
               child: const Text('Cancelar'),
             ),
             TextButton(
               onPressed: () {
-                //int? nMesa = int.tryParse(mesa.text);
                 Pedido pedidoOK = new Pedido(0, []);
-                bool isOK = widget.viewModel.validarPedido(mesa.text, productos);
+                bool isOK = widget.viewModel.validarPedido(
+                  mesa.text,
+                  productos,
+                );
 
-                if (isOK) {
-                  pedidoOK = widget.viewModel.agregarPedido(productos, widget.viewModel.mesaTemporal);
-                  Navigator.pop(context, pedidoOK);
+                if (isOK) {                
+                  Navigator.pop(context, Pedido(widget.viewModel.mesaTemporal, productos));
                 } else {
                   showDialog(
                     context: context,

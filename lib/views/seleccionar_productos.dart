@@ -11,9 +11,6 @@ class SeleccionarProductos extends StatefulWidget {
 }
 
 class _SeleccionarProductos extends State<SeleccionarProductos> {
-  //final PedidosViewModel viewModel;
-  //_SeleccionarProductos({ required this.viewModel});
-
   List<Producto> productos = [
     Producto(id: 1, nombre: 'Coca cola', precio: 2.00),
     Producto(id: 2, nombre: 'Fanta', precio: 2.40),
@@ -27,7 +24,16 @@ class _SeleccionarProductos extends State<SeleccionarProductos> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: Text("Escoge un producto")),
+      appBar: AppBar(
+        title: Text("Escoge un producto"),
+        leading: IconButton(
+          icon: Icon(Icons.arrow_back),
+          onPressed: () {
+            widget.viewModel.resetProductosSeleccionados();
+            Navigator.pop(context, widget.viewModel.productosSeleccionados);
+          },
+        ),
+      ),
       body: Column(
         children: [
           Expanded(
@@ -70,7 +76,7 @@ class _SeleccionarProductos extends State<SeleccionarProductos> {
             TextButton(
               onPressed: () => Navigator.pop(
                 context,
-                widget.viewModel.productosSeleccionados,
+                List<Producto>.from(widget.viewModel.productosSeleccionados),
               ),
               child: const Text('Confirmar'),
             ),
