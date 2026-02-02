@@ -2,11 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:prac_bar/model/pedido.dart';
 import 'package:prac_bar/model/producto.dart';
 
-<<<<<<< HEAD
-/// Gestiona el estado de los pedidos y la lógica de negocio entre vistas.
-=======
 
->>>>>>> afdd8d67438f05fbfa32f147fdc58b479cb161a8
+/// Gestiona el estado de los pedidos y la lógica de negocio entre vistas.
 class PedidosViewModel extends ChangeNotifier {
   int _mesaTemporal = 0;
   int get mesaTemporal => _mesaTemporal;
