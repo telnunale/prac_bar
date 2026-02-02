@@ -12,6 +12,9 @@ class HomeScreen extends StatefulWidget {
   State<HomeScreen> createState() => _HomeScreen();
 }
 
+/// Pantalla principal que muestra la lista de pedidos existentes.
+/// Permite navegar a la pantalla de creación de un nuevo pedido.
+/// Utiliza el [PedidosViewModel] para gestionar el estado de los pedidos.
 class _HomeScreen extends State<HomeScreen> {
   
   Pedido pedido = new Pedido(1, []);

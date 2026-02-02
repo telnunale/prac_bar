@@ -3,7 +3,7 @@ import 'package:prac_bar/model/pedido.dart';
 import 'package:prac_bar/views/detalles_pedido.dart';
 import 'package:prac_bar/views/home_screen.dart';
 import 'package:prac_bar/viewmodels/pedidos_viewmodel.dart';
-
+ 
 void main() {
   final viewModel = PedidosViewModel();
   runApp(MyApp(viewModel: viewModel));

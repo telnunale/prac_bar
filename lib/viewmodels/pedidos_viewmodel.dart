@@ -28,11 +28,12 @@ class PedidosViewModel extends ChangeNotifier {
 
     return Pedido(0, []);
   }
-
+ ///Comprueba si existe un pedido en la lista, se comprueba mediante el numero mesa. 
   bool existePedido(Pedido p) {
     return _pedidos.any((pedido) => pedido.nMesa == p.nMesa);
   }
 
+/// Cargamos unos pedidos de prueba en el Array de pedidos
   void cargaInicialPedidos() {
     _pedidos = [
       Pedido(1, [
@@ -77,8 +78,10 @@ class PedidosViewModel extends ChangeNotifier {
   }
 
   List<Producto> _productosSelecionados = [];
+  ///devuelve los productos que el usuario a seleccionado antes de realizar el pedido
   List<Producto> get productosSeleccionados => _productosSelecionados;
 
+/// Agrega un producto al array de productosSeleccionados y si existe lo elimina del array
   void agregarProductoSeleccionado(Producto p) {
     //bool estaSeleccionado = productoEstaSeleccionado(p.id);
     final esta = productosSeleccionados.indexWhere(
@@ -91,11 +94,12 @@ class PedidosViewModel extends ChangeNotifier {
     }
     notifyListeners(); //avisar de que hubo un cambio
   }
-
+  /// Elimina todos los productos del array de productos seleccionados
   void resetProductosSeleccionados() {
     _productosSelecionados.clear();
   }
 
+/// Comprueba si un producto ha sido selecionado por el usuario
   bool productoEstaSeleccionado(int id) {
     return _productosSelecionados.any((producto) => producto.id == id);
   }

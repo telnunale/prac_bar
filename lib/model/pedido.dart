@@ -7,6 +7,7 @@ class Pedido {
 
   Pedido(this.nMesa, this.productos);
 
+  /// Devuelve  la suma total de todos los productos
   double precioTotal() {
     double contador = 0.0;
     productos.forEach((p) {
@@ -14,8 +15,7 @@ class Pedido {
     });
     return contador;
   }
-
   
-  
+  /// Devuelve la cantidad de productos totales
   int get productosTotales => productos.length;
 }

@@ -9,7 +9,12 @@ class SeleccionarProductos extends StatefulWidget {
   @override
   State<SeleccionarProductos> createState() => _SeleccionarProductos();
 }
-
+/// Pantalla para seleccionar productos para un pedido.
+/// Utiliza el [PedidosViewModel] para gestionar los productos seleccionados.
+/// Muestra una lista de productos disponibles y permite seleccionar varios.
+/// Confirma la selección y devuelve los productos seleccionados al regresar.
+/// Utiliza un ListView para mostrar los productos y resaltar los seleccionados.
+/// Permite cancelar la selección y regresar sin cambios.
 class _SeleccionarProductos extends State<SeleccionarProductos> {
   List<Producto> productos = [
     Producto(id: 1, nombre: 'Coca cola', precio: 2.00),

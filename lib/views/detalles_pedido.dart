@@ -5,6 +5,7 @@ import 'package:prac_bar/model/pedido.dart';
 
 /// Pantalla que muestra el desglose de un pedido.
 /// Recibe el objeto [Pedido] a través de los argumentos de la ruta.
+/// Muestra la lista de productos y el total del pedido.
 class DetallesPedido extends StatelessWidget {
   Pedido pedido = new Pedido(1, []);
   DetallesPedido({super.key, required this.pedido});
@@ -30,8 +31,9 @@ class DetallesPedido extends StatelessWidget {
                   );
                 },
               ),
-            ),
+            ),           
             Text("Total: ${pedido.precioTotal().toStringAsFixed(2)}€"),
+
             TextButton(
               onPressed: () => Navigator.pop(context),
               child: Text("Volver atrás"),

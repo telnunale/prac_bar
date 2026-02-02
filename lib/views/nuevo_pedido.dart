@@ -12,6 +12,11 @@ class NuevoPedido extends StatefulWidget {
   @override
   State<NuevoPedido> createState() => _NuevoPedido();
 }
+/// Pantalla para crear un nuevo pedido.
+/// Permite seleccionar la mesa y los productos.
+/// Utiliza el [PedidosViewModel] para validar y gestionar el pedido temporal.
+/// Muestra un resumen del pedido antes de confirmarlo.
+/// Utiliza la pantalla [SeleccionarProductos] para elegir los productos.
 
 class _NuevoPedido extends State<NuevoPedido> {
   List<Producto> productos = [];
