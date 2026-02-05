@@ -74,81 +74,97 @@ class _NuevoPedido extends State<NuevoPedido> {
         padding: EdgeInsets.all(10),
         child: Row(
           children: [
-            TextButton(
-              //boton de ver resumen
-              onPressed: () {
-                //int? nMesa = int.tryParse(mesa.text);
-                bool isOK = widget.viewModel.validarPedido(
-                  mesa.text,
-                  productos,
-                );
-
-                if (isOK) {
-                  Pedido resumenPedido = new Pedido(
-                    widget.viewModel.mesaTemporal,
+            Tooltip(
+              message: "Ver resumen del pedido antes de confirmar",
+              child: TextButton(
+                //boton de ver resumen
+                onPressed: () {
+                  //int? nMesa = int.tryParse(mesa.text);
+                  bool isOK = widget.viewModel.validarPedido(
+                    mesa.text,
                     productos,
                   );
-                  Navigator.pushNamed(
-                    context,
-                    DetallesPedido.routeName,
-                    arguments: resumenPedido,
-                  );
-                } else {
-                  showDialog(
-                    context: context,
-                    builder: (context) {
-                      return AlertDialog(
-                        title: const Text("Error"),
-                        content: const Text("Error al validar pedido"),
-                        actions: [
-                          TextButton(
-                            onPressed: () => Navigator.pop(context),
-                            child: Text("ok"),
-                          ),
-                        ],
-                      );
-                    },
-                  );
-                }
-              },
-              child: const Text('Ver Resumen'),
-            ),
-            TextButton(
-              onPressed: () {
-                widget.viewModel.resetProductosSeleccionados();
-                Navigator.pop(context, null);
-              },
-              child: const Text('Cancelar'),
-            ),
-            TextButton(
-              onPressed: () {
-                Pedido pedidoOK = new Pedido(0, []);
-                bool isOK = widget.viewModel.validarPedido(
-                  mesa.text,
-                  productos,
-                );
 
-                if (isOK) {                
-                  Navigator.pop(context, Pedido(widget.viewModel.mesaTemporal, productos));
-                } else {
-                  showDialog(
-                    context: context,
-                    builder: (context) {
-                      return AlertDialog(
-                        title: const Text("Error"),
-                        content: const Text("Error al validar pedido"),
-                        actions: [
-                          TextButton(
-                            onPressed: () => Navigator.pop(context),
-                            child: Text("ok"),
-                          ),
-                        ],
-                      );
-                    },
+                  if (isOK) {
+                    Pedido resumenPedido = new Pedido(
+                      widget.viewModel.mesaTemporal,
+                      productos,
+                    );
+                    Navigator.pushNamed(
+                      context,
+                      DetallesPedido.routeName,
+                      arguments: resumenPedido,
+                    );
+                  } else {
+                    showDialog(
+                      context: context,
+                      builder: (context) {
+                        return AlertDialog(
+                          title: const Text("Error"),
+                          content: const Text("Error al validar pedido"),
+                          actions: [
+                            TextButton(
+                              onPressed: () => Navigator.pop(context),
+                              child: Text("ok"),
+                            ),
+                          ],
+                        );
+                      },
+                    );
+                  }
+                },
+                child: const Text('Ver Resumen'),
+              ),
+            ),
+            Tooltip(
+              message: "Cancelar y volver atrás",
+              child: TextButton(
+                onPressed: () {
+                  widget.viewModel.resetProductosSeleccionados();
+                  Navigator.pop(context, null);
+                },
+                child: const Text('Cancelar'),
+              ),
+            ),
+            Tooltip(
+              message: "Confirmar y crear el pedido",
+              child: TextButton(
+                onPressed: () {
+                  Pedido pedidoOK = new Pedido(0, []);
+                  bool isOK = widget.viewModel.validarPedido(
+                    mesa.text,
+                    productos,
                   );
-                }
-              },
-              child: const Text('Confirmar'),
+
+                  if (isOK) {
+                    ScaffoldMessenger.of(context).showSnackBar(
+                      SnackBar(
+                        content: Text("Pedido creado correctamente para la mesa ${widget.viewModel.mesaTemporal}"),
+                        backgroundColor: Colors.green,
+                        duration: Duration(seconds: 2),
+                      ),
+                    );
+                    Navigator.pop(context, Pedido(widget.viewModel.mesaTemporal, productos));
+                  } else {
+                    showDialog(
+                      context: context,
+                      builder: (context) {
+                        return AlertDialog(
+                          title: const Text("Error"),
+                          content: const Text("Error al validar pedido"),
+                          actions: [
+                            TextButton(
+                              onPressed: () => Navigator.pop(context),
+                              child: Text("ok"),
+                            ),
+                          ],
+                        );
+                      },
+                    );
+                  }
+                },
+                child: const Text('Confirmar'),
+              ),
             ),
           ],
         ),

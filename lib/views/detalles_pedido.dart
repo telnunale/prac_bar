@@ -32,12 +32,11 @@ class DetallesPedido extends StatelessWidget {
                 },
               ),
             ),           
-            Text("Total: ${pedido.precioTotal().toStringAsFixed(2)}€"),
-
+            Text("Total: ${pedido.precioTotal().toStringAsFixed(2)}€"),            
             TextButton(
               onPressed: () => Navigator.pop(context),
               child: Text("Volver atrás"),
-            ),
+            ),            
           ],
         ),
       ),
